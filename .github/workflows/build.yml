@@ -24,6 +24,11 @@ jobs:
       - uses: ./.github/actions/build_package
         name: build_test
 
+      - name: ls
+        run: |
+          ls -lh
+          cd clio
+          git tag --points-at HEAD
   # build_rpm_package:
   #   runs-on: ubuntu-latest
   #   container:
