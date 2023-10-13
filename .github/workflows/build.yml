@@ -17,6 +17,12 @@ jobs:
     env:
       PKG: deb
     steps:
+      - name: ls
+        run: |
+          ulimit -n 1024000 && yum update -y
+          yum install -y sclo-git25-git -y
+          source /opt/rh/sclo-git25/enable
+\
       - name: Get Clio
         uses: actions/checkout@v3
         with:
@@ -27,7 +33,8 @@ jobs:
 
       - name: ls
         run: |
-          echo "cur dir ls: $(ls -lh)"
+          source /opt/rh/sclo-git25/enable
+          git --version
           git tag --points-at HEAD
   # build_rpm_package:
   #   runs-on: ubuntu-latest
