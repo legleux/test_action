@@ -22,7 +22,7 @@ jobs:
           ulimit -n 1024000 && yum update -y
           yum install -y sclo-git25-git -y
           source /opt/rh/sclo-git25/enable
-\
+
       - name: Get Clio
         uses: actions/checkout@v3
         with:
