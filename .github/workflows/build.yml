@@ -1,9 +1,10 @@
 name: pkg test
 on:
   push:
-    branches: [main, release/*, develop]
-  pull_request:
-    branches: [main, release/*, develop]
+    # branches: [main, release/*, develop]
+    tags:
+      - '**'
+
   workflow_dispatch:
 
 jobs:
