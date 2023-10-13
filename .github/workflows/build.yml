@@ -17,11 +17,21 @@ jobs:
     env:
       PKG: deb
     steps:
-      - name: ls
+      - name: Install git
         run: |
-          ulimit -n 1024000 && yum update -y
-          yum install -y sclo-git25-git -y
-          source /opt/rh/sclo-git25/enable
+          ulimit -n 1024000 && yum -y update
+          source /opt/rh/devtoolset-11/enable
+          yum install -y curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-CPAN perl-devel
+          cd /tmp/ && mkdir git && cd git
+          wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.42.0.tar.gz
+          tar -xvf git-2.42.0.tar.gz # --strip-components=1 # ?
+          cd git-2.42.0
+
+          make configure
+          ./configure --prefix=/usr/local
+          make -j $(($(nproc) - 2))
+          make install
+          git --version
 
       - name: Get Clio
         uses: actions/checkout@v3
@@ -34,7 +44,6 @@ jobs:
       - name: ls
         run: |
           source /opt/rh/sclo-git25/enable
-          git --version
           git tag --points-at HEAD
   # build_rpm_package:
   #   runs-on: ubuntu-latest
