@@ -1,0 +1,13 @@
+name: Build pkg
+description: Build pkg
+
+runs:
+  using: composite
+  steps:
+
+    - name: Build Clio
+      shell: bash
+      env:
+        BUILD_OPTION: "${{ inputs.conan_cache_hit == 'true' && 'missing' || '' }}"
+      run: |
+        ./.github/actions/build_package/build.py

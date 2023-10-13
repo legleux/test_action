@@ -1,0 +1,37 @@
+name: pkg test
+on:
+  push:
+    branches: [main, release/*, develop]
+  pull_request:
+    branches: [main, release/*, develop]
+  workflow_dispatch:
+
+jobs:
+
+  build_deb_package:
+    name: Build deb packages
+    runs-on: ubuntu-latest
+    container:
+      image: legleux/rippled-builder:10-06-23
+    env:
+      PKG: deb
+    steps:
+      - name: Get Clio
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/build_package
+        name: build_test
+
+  # build_rpm_package:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: legleux/rippled-builder:10-06-23
+  #   env:
+  #     PKG: rpm
+  #   steps:
+  #     - name: Get Clio
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
