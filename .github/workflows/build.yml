@@ -39,11 +39,10 @@ jobs:
           fetch-depth: 0
 
       - uses: ./.github/actions/build_package
-        name: build_test
+        name: Test pkg step
 
-      - name: ls
+      - name: check for tag
         run: |
-          source /opt/rh/sclo-git25/enable
           git tag --points-at HEAD
   # build_rpm_package:
   #   runs-on: ubuntu-latest
