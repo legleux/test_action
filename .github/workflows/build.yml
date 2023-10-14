@@ -17,13 +17,13 @@ jobs:
     env:
       PKG: deb
     steps:
-      - name: Install git
-        uses: ./.github/actions/update_git
-
       - name: Get Clio
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: Install git
+        uses: ./.github/actions/update_git
 
       - uses: ./.github/actions/build_package
         name: Test pkg step
