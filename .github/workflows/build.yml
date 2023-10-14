@@ -29,7 +29,7 @@ jobs:
 
           make configure
           ./configure --prefix=/usr/local
-          make -j $(($(nproc) - 2))
+          make -j $(nproc)
           make install
           git --version
 
