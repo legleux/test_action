@@ -44,7 +44,8 @@ jobs:
       - name: check for tag
         run: |
           git config --global --add safe.directory /__w/test_action/test_action
-          git tag --points-at HEAD
+          TAG=$(git tag --points-at HEAD)
+          echo "TAG is $TAG"
   # build_rpm_package:
   #   runs-on: ubuntu-latest
   #   container:
