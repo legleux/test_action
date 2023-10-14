@@ -45,6 +45,8 @@ jobs:
         run: |
           git --version
           git config --global --add safe.directory $PWD
+          git tag --points-at HEAD
+          echo $(git tag --points-at HEAD)
           TAG=$(git tag --points-at HEAD)
           echo "TAG is $TAG"
   # build_rpm_package:
