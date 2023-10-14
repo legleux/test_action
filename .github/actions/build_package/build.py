@@ -1,4 +1,8 @@
 #!/usr/bin/env python
 import os
+import sys
 
-print(os.getcwd())
+
+for k,v in os.environ.items():
+    print(k,v)
+print(os.environ['PKG'])
