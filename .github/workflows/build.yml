@@ -30,6 +30,7 @@ jobs:
 
       - name: check for tag
         run: |
+          git --version
           git config --global --add safe.directory /__w/test_action/test_action
           TAG=$(git tag --points-at HEAD)
           echo "TAG is $TAG"
