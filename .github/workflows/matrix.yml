@@ -1,0 +1,36 @@
+name: nix
+on: [push, pull_request]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  dependencies:
+    name: "Dependencies"
+    strategy:
+      matrix:
+        platform:
+          - linux
+        compiler:
+          - gcc
+          - clang
+        configuration:
+          - Debug
+          - Release
+        include:
+          - compiler: gcc
+            profile:
+              version: 11
+              cc: /usr/bin/gcc
+              cxx: /usr/bin/g++
+          - compiler: clang
+            profile:
+              version: 14
+              cc: /usr/bin/clang-14
+              cxx: /usr/bin/clang++-14
+      name: ${{ matrix.compiler }} ${{ matrix.configuration }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run stuff
+        run: echo neat ${{ matrix.compiler }} ${{ matrix.configuration }} ${{ matrix.include }}
